@@ -1,46 +1,47 @@
-# Getting Started with Create React App
+# Richae
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Richae-d.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9b5e2c30-7cfb-40f1-b74d-b9f7e3d73a75/Richae-d.png)
 
-## Available Scripts
+![Richae-f.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1e78cf30-8205-4b83-88da-df7a15db38cd/Richae-f.png)
 
-In the project directory, you can run:
+![favicon 복사본.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/0c159fb9-4798-48ea-b36a-da12e476878a/favicon_%E1%84%87%E1%85%A9%E1%86%A8%E1%84%89%E1%85%A1%E1%84%87%E1%85%A9%E1%86%AB.png)
 
-### `npm start`
+> Find the ETF information you want. | feat.twelvedata
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+I developed the project using the free version of twelvedata.
+I'll be able to find quite a lot of ETF information, not just the US.
+I am currently developing a project.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Please note that we used the technology stacks next time.
 
-### `npm test`
+- React
+- TypeScript
+- Craco
+- Styled-components
+- Recoil
+- ... etc
+-
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Richae | Setting, Start
 
-### `npm run build`
+```
+npm install || yarn install //project install
+npm start || yarn start //craco start <-- project start [craco]
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Richae | Develop today..
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 2022-01-22
 
-### `npm run eject`
+- [x] Craco Setting
+- [ ] Darkmode setting
+- [ ] Data Fetching
+- [ ] UI
+- [x] Split Folder
+- [x] Project [Readme.md](http://readme.md/)
+- [x] Logo, favicon
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 2022-01-21
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [x] Project Setting

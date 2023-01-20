@@ -1,11 +1,18 @@
+import Home from "@pages/Home";
 import GlobalStyled from "@utils/GlobalStyled";
 import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
-    <div>
+    <>
       <GlobalStyled />
-    </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 

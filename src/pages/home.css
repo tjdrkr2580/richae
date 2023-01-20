@@ -1,0 +1,10 @@
+.logo {
+  font-family: "Zilla Slab", serif;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 700;
+  color: #5b8fb9;
+  font-size: 4rem;
+}
