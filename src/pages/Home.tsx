@@ -1,12 +1,7 @@
 import React from "react";
-import "./home.css";
 
 const Home = () => {
-  return (
-    <div>
-      <h1 className="logo">Richae</h1>
-    </div>
-  );
+  return <div>Home</div>;
 };
 
 export default Home;
