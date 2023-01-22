@@ -8,6 +8,7 @@ const Globalstyle = createGlobalStyle`
             padding: 0;
             font-family: Pretendard;
             text-decoration: none;
+            list-style: none;
         }
         body {
             min-height: 100vh;
