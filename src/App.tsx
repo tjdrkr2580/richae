@@ -9,6 +9,9 @@ import styled, { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "@utils/theme";
 import { useQuery } from "react-query";
 import axios from "axios";
+import Search from "@pages/Search";
+import OnlyKR from "@pages/OnlyKR";
+import Detail from "@pages/Detail";
 
 const RichaeWrapper = styled.div`
   min-width: 100vw;
@@ -47,6 +50,9 @@ function App() {
             <Header />
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/only-KR" element={<OnlyKR />} />
+              <Route path="/detail/:id" element={<Detail />} />
             </Routes>
             <Footer />
           </RichaeWrapper>

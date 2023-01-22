@@ -5,6 +5,7 @@ import { BsMoonFill } from "react-icons/bs";
 import { BsSunFill } from "react-icons/bs";
 import { useRecoilState } from "recoil";
 import { darkmode } from "@utils/atom";
+import { GoSearch } from "react-icons/go";
 
 const HeaderFixedWrapper = styled.header`
   width: 100vw;
@@ -34,12 +35,12 @@ const HeaderWrapper = styled.section`
 
 const HeaderList = styled.ul`
   display: flex;
-  gap: 2.5rem;
+  gap: 4rem;
   align-items: center;
   li {
     a {
       cursor: pointer;
-      font-size: 1.9rem;
+      font-size: 1.6rem;
     }
   }
   .toggleMode {
@@ -62,13 +63,15 @@ const Header = () => {
         <h1>Richae</h1>
         <HeaderList>
           <li>
-            <Link to="/">Focus on KR</Link>
-          </li>
-          <li>
-            <Link to="/">Search</Link>
+            <Link to="/only-KR">KR</Link>
           </li>
           <li className="toggleMode" onClick={onToggleMode}>
             {darkmodeState ? <BsSunFill size={22} /> : <BsMoonFill size={20} />}
+          </li>
+          <li>
+            <Link to="/search">
+              <GoSearch size={20} />
+            </Link>
           </li>
         </HeaderList>
       </HeaderWrapper>
