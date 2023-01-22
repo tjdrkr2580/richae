@@ -35,16 +35,14 @@ npm install || yarn install //project install
 npm start || yarn start //craco start <-- project start [craco]
 ```
 
-
 ## Richae | Develop today..
-
 
 ### 2022-01-22
 
 - [x] Craco Setting
-- [ ] Darkmode setting
-- [ ] Data Fetching
-- [ ] UI
+- [x] Darkmode setting
+- [x] Data Fetching
+- [x] Header UI
 - [x] Split Folder
 - [x] Project Readme
 - [x] Logo, favicon
