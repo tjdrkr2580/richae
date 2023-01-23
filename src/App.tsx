@@ -8,7 +8,6 @@ import { useRecoilState } from "recoil";
 import styled, { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "@utils/theme";
 import Search from "@pages/Search";
-import OnlyKR from "@pages/OnlyKR";
 import Detail from "@pages/Detail";
 import { useEffect } from "react";
 
@@ -48,7 +47,6 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/search" element={<Search />} />
-              <Route path="/only-KR" element={<OnlyKR />} />
               <Route path="/detail/:id" element={<Detail />} />
             </Routes>
             <Footer />

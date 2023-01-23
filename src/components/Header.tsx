@@ -12,7 +12,8 @@ const HeaderFixedWrapper = styled.header`
   position: fixed;
   top: 0;
   left: 0;
-  height: 6rem;
+  height: 6.5rem;
+  background-color: ${(props) => props.theme.bgColor};
 `;
 
 const HeaderWrapper = styled.section`
@@ -20,10 +21,11 @@ const HeaderWrapper = styled.section`
   margin: 0 auto;
   max-width: 80rem;
   height: 100%;
-  padding: 0.8rem 0;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  border-bottom: 0.25rem solid ${(props) => props.theme.color};
+
   h1 {
     cursor: pointer;
     font-family: "Zilla Slab", serif;
@@ -66,9 +68,6 @@ const Header = () => {
         </Link>
 
         <HeaderList>
-          <li>
-            <Link to="/only-KR">KR</Link>
-          </li>
           <li className="toggleMode" onClick={onToggleMode}>
             {darkmodeState ? <BsSunFill size={22} /> : <BsMoonFill size={20} />}
           </li>

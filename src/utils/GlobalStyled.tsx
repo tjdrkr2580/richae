@@ -13,6 +13,7 @@ const Globalstyle = createGlobalStyle`
         body {
             min-height: 100vh;
             min-width: 100vw;
+            overflow-x: hidden;
         }
         button {
             padding: 0.4rem 0.8rem;

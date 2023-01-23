@@ -3,7 +3,9 @@ import React from "react";
 import styled from "styled-components";
 
 const HomeWraaper = styled.section`
-  margin-top: -50rem;
+  width: 95vw;
+  max-width: 102.4rem;
+  margin: 10rem auto 0 auto;
 `;
 
 const Home = () => {
