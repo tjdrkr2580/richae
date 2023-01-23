@@ -4,7 +4,7 @@ import Home from "@pages/Home";
 import { darkmode } from "@utils/atom";
 import GlobalStyled from "@utils/GlobalStyled";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import styled, { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "@utils/theme";
 import { useQuery } from "react-query";
@@ -12,6 +12,7 @@ import axios from "axios";
 import Search from "@pages/Search";
 import OnlyKR from "@pages/OnlyKR";
 import Detail from "@pages/Detail";
+import { useEffect } from "react";
 
 const RichaeWrapper = styled.div`
   min-width: 100vw;
@@ -30,7 +31,14 @@ const RichaeWrapper = styled.div`
 `;
 
 function App() {
-  const darkmodeState = useRecoilValue(darkmode);
+  const [darkmodeState, setDarkState] = useRecoilState(darkmode);
+  useEffect(() => {
+    if (window.localStorage.getItem("Richae-Darkmode") === "false") {
+      setDarkState(false);
+    } else if (window.localStorage.getItem("Richae-Darkmode") === "true") {
+      setDarkState(true);
+    }
+  }, [darkmodeState, setDarkState]);
   const { isLoading } = useQuery("fetching-etf-data", async () => {
     await axios
       .get("https://api.twelvedata.com/etf", {
@@ -42,7 +50,7 @@ function App() {
   });
   return (
     <>
-      <ThemeProvider theme={!darkmodeState ? lightTheme : darkTheme}>
+      <ThemeProvider theme={darkmodeState ? darkTheme : lightTheme}>
         <BrowserRouter>
           <RichaeWrapper>
             <GlobalStyled />

@@ -56,6 +56,7 @@ const Header = () => {
   const [darkmodeState, setDarkmode] = useRecoilState(darkmode);
   const onToggleMode = () => {
     setDarkmode(!darkmodeState);
+    window.localStorage.setItem("Richae-Darkmode", String(!darkmodeState));
   };
   return (
     <HeaderFixedWrapper>
