@@ -10,7 +10,7 @@ type themeTypes = {
 };
 
 export const lightTheme: themeTypes = {
-  bgColor: "#F9F9F9",
+  bgColor: "#fafbfd",
   color: "#03001C",
   button: "#ECC5FB",
   inputBorder: "#ECC5FB",

@@ -61,7 +61,10 @@ const Header = () => {
   return (
     <HeaderFixedWrapper>
       <HeaderWrapper>
-        <h1>Richae</h1>
+        <Link to="/">
+          <h1>Richae</h1>
+        </Link>
+
         <HeaderList>
           <li>
             <Link to="/only-KR">KR</Link>

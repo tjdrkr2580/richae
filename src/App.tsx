@@ -7,8 +7,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled, { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "@utils/theme";
-import { useQuery } from "react-query";
-import axios from "axios";
 import Search from "@pages/Search";
 import OnlyKR from "@pages/OnlyKR";
 import Detail from "@pages/Detail";
@@ -39,15 +37,6 @@ function App() {
       setDarkState(true);
     }
   }, [darkmodeState, setDarkState]);
-  const { isLoading } = useQuery("fetching-etf-data", async () => {
-    await axios
-      .get("https://api.twelvedata.com/etf", {
-        headers: {
-          Authorization: process.env.REACT_APP_API_KEY,
-        },
-      })
-      .then((response) => console.log(response.data.data));
-  });
   return (
     <>
       <ThemeProvider theme={darkmodeState ? darkTheme : lightTheme}>
