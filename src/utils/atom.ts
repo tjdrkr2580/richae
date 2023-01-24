@@ -1,4 +1,4 @@
-import { etfType } from "./type.d";
+import { detailType, etfType } from "./type.d";
 import { atom } from "recoil";
 import { v1 } from "uuid";
 

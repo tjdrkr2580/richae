@@ -37,12 +37,20 @@ npm start || yarn start //craco start <-- project start [craco]
 
 ## Richae | Develop today..
 
-### 2022-01-23
+### 2022-01-25
 
-- [ ] \*none Warinning button
-- [x] Skeleton UI
-- [ ] Detail Data Fetching
+- [ ] Error Handling
+- [x] Fetching Skeleton UI
+- [ ] Detail Datas Fetching
 - [ ] Modal Warning
+- [ ] \*none Warinning button
+
+### 2022-01-24
+
+- [x] Skeleton UI
+- [x] Detail Datas Fetching
+
+### 2022-01-23
 
 - [x] UI
 - [x] React Query..
