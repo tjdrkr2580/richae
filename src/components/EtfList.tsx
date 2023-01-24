@@ -1,10 +1,12 @@
-import { etfList } from "@utils/atom";
+import { darkmode, etfList } from "@utils/atom";
 import axios from "axios";
 import React from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const EtfListWrapper = styled.ul`
   margin: 0 auto;
@@ -58,6 +60,7 @@ const EtfListForm = styled.li`
 
 const EtfList = () => {
   const [etfState, setEtfState] = useRecoilState(etfList);
+  const darkmodeState = useRecoilValue(darkmode);
   const { isLoading } = useQuery(
     "fetching-etf-data",
     async () => {
@@ -80,19 +83,39 @@ const EtfList = () => {
   );
   return (
     <EtfListWrapper>
-      {isLoading === false
-        ? etfState?.map((etf, index) => (
-            <Link to={`/detail/${etf.symbol}`} key={index}>
-              <EtfListForm>
-                <div className="etf-header">
-                  <h1>{index + 1}</h1>
-                  <span>{etf.symbol}</span>
-                </div>
-                <p>{etf.name}</p>
-              </EtfListForm>
-            </Link>
-          ))
-        : null}
+      {isLoading === false ? (
+        etfState?.map((etf, index) => (
+          <Link to={`/detail/${etf.symbol}`} key={index}>
+            <EtfListForm>
+              <div className="etf-header">
+                <h1>{index + 1}</h1>
+                <span>{etf.symbol}</span>
+              </div>
+              <p>{etf.name}</p>
+            </EtfListForm>
+          </Link>
+        ))
+      ) : (
+        <>
+          {darkmodeState ? (
+            <SkeletonTheme baseColor="#202020" highlightColor="#444">
+              <p>
+                <Skeleton
+                  count={20}
+                  height={72.5}
+                  style={{ marginBottom: "2rem" }}
+                />
+              </p>
+            </SkeletonTheme>
+          ) : (
+            <Skeleton
+              count={20}
+              height={72.5}
+              style={{ marginBottom: "2rem" }}
+            />
+          )}
+        </>
+      )}
     </EtfListWrapper>
   );
 };

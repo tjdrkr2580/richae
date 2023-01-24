@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { GrLinkTop } from "react-icons/gr";
 
 const TopWrapper = styled.section`
+  z-index: 9;
   cursor: pointer;
   border: 1px solid white;
   display: flex;
