@@ -103,7 +103,7 @@ const EtfList = () => {
                 <Skeleton
                   count={20}
                   height={72.5}
-                  style={{ marginBottom: "2rem" }}
+                  style={{ marginBottom: "2rem", borderRadius: "1rem" }}
                 />
               </p>
             </SkeletonTheme>
@@ -111,7 +111,7 @@ const EtfList = () => {
             <Skeleton
               count={20}
               height={72.5}
-              style={{ marginBottom: "2rem" }}
+              style={{ marginBottom: "2rem", borderRadius: "1rem" }}
             />
           )}
         </>
