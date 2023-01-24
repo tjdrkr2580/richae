@@ -21,14 +21,24 @@ const EtfListForm = styled.li`
   border: 0.15rem solid ${(props) => props.theme.color};
   display: flex;
   border-radius: 1rem;
-  gap: 1rem;
+  gap: 0.6rem;
   justify-content: center;
   flex-direction: column;
   background-color: ${(props) => props.theme.bgColor};
-  h1 {
-    font-size: 1.5rem;
+  .etf-header {
+    display: flex;
+    gap: 1.5rem;
     width: 90%;
+    align-items: center;
+    h1 {
+      color: ${(props) => props.theme.svg};
+      font-size: 1.4rem;
+    }
+    span {
+      font-size: 1.2rem;
+    }
   }
+
   p {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -74,7 +84,10 @@ const EtfList = () => {
         ? etfState?.map((etf, index) => (
             <Link to={`/detail/${etf.symbol}`} key={index}>
               <EtfListForm>
-                <h1>{etf.symbol}</h1>
+                <div className="etf-header">
+                  <h1>{index + 1}</h1>
+                  <span>{etf.symbol}</span>
+                </div>
                 <p>{etf.name}</p>
               </EtfListForm>
             </Link>
