@@ -2,6 +2,7 @@ import { etfList } from "@utils/atom";
 import axios from "axios";
 import React from "react";
 import { useQuery } from "react-query";
+import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 
@@ -19,7 +20,6 @@ const EtfListForm = styled.li`
   align-items: center;
   border: 0.15rem solid ${(props) => props.theme.color};
   display: flex;
-  padding-left: 1rem;
   border-radius: 1rem;
   gap: 1rem;
   justify-content: center;
@@ -27,11 +27,17 @@ const EtfListForm = styled.li`
   background-color: ${(props) => props.theme.bgColor};
   h1 {
     font-size: 1.5rem;
-    width: 100%;
+    width: 90%;
   }
   p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* 라인수 */
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
     font-size: 1.4rem;
-    width: 100%;
+    width: 87.5%;
   }
   transition: 0.25s filter, 0.25s transform;
   &:hover {
@@ -56,7 +62,7 @@ const EtfList = () => {
             },
           }
         );
-        setEtfState(etfList.data.data.slice(0, 150));
+        setEtfState(etfList.data.data.slice(0, 200));
       }
     },
     {
@@ -69,10 +75,12 @@ const EtfList = () => {
     <EtfListWrapper>
       {isLoading === false
         ? etfState?.map((etf, index) => (
-            <EtfListForm key={index}>
-              <h1>{etf.symbol}</h1>
-              <p>{etf.name}</p>
-            </EtfListForm>
+            <Link to={`/detail/${etf.symbol}`} key={index}>
+              <EtfListForm>
+                <h1>{etf.symbol}</h1>
+                <p>{etf.name}</p>
+              </EtfListForm>
+            </Link>
           ))
         : null}
     </EtfListWrapper>

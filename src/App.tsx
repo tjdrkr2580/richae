@@ -10,6 +10,7 @@ import { lightTheme, darkTheme } from "@utils/theme";
 import Search from "@pages/Search";
 import Detail from "@pages/Detail";
 import { useEffect } from "react";
+import Top from "@components/Top";
 
 const RichaeWrapper = styled.div`
   min-width: 100vw;
@@ -49,6 +50,7 @@ function App() {
               <Route path="/search" element={<Search />} />
               <Route path="/detail/:id" element={<Detail />} />
             </Routes>
+            <Top />
             <Footer />
           </RichaeWrapper>
         </BrowserRouter>

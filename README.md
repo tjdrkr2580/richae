@@ -13,8 +13,8 @@
 
 <br>
 
-I developed the project using the free version of twelvedata.
-I'll be able to find quite a lot of ETF information, not just the US.
+I developed the project using the free version of twelvedata, etc..
+I'll be able to find quite a lot of Stock information.
 I am currently developing a project.
 
 Please note that we used the technology stacks next time.
@@ -36,6 +36,16 @@ npm start || yarn start //craco start <-- project start [craco]
 ```
 
 ## Richae | Develop today..
+
+### 2022-01-23
+
+- [x] UI
+- [x] React Query..
+- [x] Redundant rendering
+- [x] Mobile Cover
+- [x] Prevent duplicate data fetching
+- [] Top button
+- [] \*none Warinning button
 
 ### 2022-01-22
 

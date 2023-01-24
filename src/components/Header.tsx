@@ -8,6 +8,7 @@ import { darkmode } from "@utils/atom";
 import { GoSearch } from "react-icons/go";
 
 const HeaderFixedWrapper = styled.header`
+  z-index: 999;
   width: 100vw;
   position: fixed;
   top: 0;
