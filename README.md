@@ -44,7 +44,7 @@ npm start || yarn start //craco start <-- project start [craco]
 - [x] Redundant rendering
 - [x] Mobile Cover
 - [x] Prevent duplicate data fetching
-- [] Top button
+- [x] Top button
 - [] \*none Warinning button
 
 ### 2022-01-22

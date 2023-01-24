@@ -46,8 +46,6 @@ const EtfListForm = styled.li`
   }
 `;
 
-//
-
 const EtfList = () => {
   const [etfState, setEtfState] = useRecoilState(etfList);
   const { isLoading } = useQuery(
@@ -70,7 +68,6 @@ const EtfList = () => {
       staleTime: 60 * 2000,
     }
   );
-  console.log(etfState);
   return (
     <EtfListWrapper>
       {isLoading === false

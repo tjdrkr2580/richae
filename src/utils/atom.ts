@@ -11,3 +11,8 @@ export const etfList = atom<etfType[] | undefined>({
   key: `state ${v1()}`,
   default: undefined,
 });
+
+export const toggle = atom<boolean>({
+  key: `state ${v1()}`,
+  default: false,
+});
