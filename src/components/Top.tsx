@@ -15,6 +15,11 @@ const TopWrapper = styled.section`
   bottom: 3rem;
   background-color: ${(props) => props.theme.color};
   right: 2.5rem;
+  transition: 0.25s filter, 0.25s transform;
+  &:hover {
+    filter: brightness(95%);
+    transform: scale(1.04);
+  }
   svg {
     path {
       stroke: ${(props) => props.theme.bgColor};

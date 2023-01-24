@@ -22,11 +22,11 @@ export const lightTheme: themeTypes = {
 
 export const darkTheme: themeTypes = {
   bgColor: "#121212",
-  color: "#EEEEEE",
+  color: "#dedcdc",
   button: "#5c5470",
   inputBorder: "#5c5470",
   symbolUp: "#e84d32",
   symbolDown: "#0082e2",
   primary: "#5B8FB9",
-  svg: "#dbd8e3",
+  svg: "#65647C",
 };
