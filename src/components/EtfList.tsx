@@ -37,7 +37,7 @@ const EtfListForm = styled.li`
       font-size: 1.4rem;
     }
     span {
-      font-size: 1.2rem;
+      font-size: 1.35rem;
     }
   }
 

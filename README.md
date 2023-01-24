@@ -38,12 +38,11 @@ npm start || yarn start //craco start <-- project start [craco]
 ## Richae | Develop today..
 
 ### 2022-01-23
-- [ ] *none Warinning button
-- [ ] Skeleton UI
+
+- [ ] \*none Warinning button
+- [x] Skeleton UI
 - [ ] Detail Data Fetching
 - [ ] Modal Warning
-
-
 
 - [x] UI
 - [x] React Query..
@@ -51,7 +50,6 @@ npm start || yarn start //craco start <-- project start [craco]
 - [x] Mobile Cover
 - [x] Prevent duplicate data fetching
 - [x] Top button
-- [ ] *none Warinning button
 
 ### 2022-01-22
 
