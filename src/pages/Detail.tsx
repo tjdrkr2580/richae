@@ -16,6 +16,10 @@ const DetailWrapper = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  .notice {
+    font-size: 1.45rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const DetailHeader = styled.header`
@@ -70,30 +74,26 @@ const Detail = () => {
     "-" +
     ("00" + (day - 10)).slice(-2);
   const { id } = useParams();
-  const [dateRange, setDateRange] = useState(undefined);
+  const [priceInfo, setPriceInfo] = useState<any>(undefined);
   const [detail, setDetail] = useState<any>(undefined);
-  const [yesDetail, setYesDetail] = useState<undefined | detailType>(undefined);
   const { isLoading, isError } = useQuery(
     "fetching-detail-data",
     async () => {
-      const rangeFetching = await axios.get(
-        `https://api.polygon.io/v2/aggs/ticker/${id}/range/1/day/${fromDate}/${toDate}?adjusted=true&sort=asc&limit=120&apiKey=zbd1YPIQqlJFRipVDQU1bRm3DMYrifM_`
+      const priceInfoFetching = await axios(
+        `https://api.twelvedata.com/quote?symbol=${id}&apikey=${process.env.REACT_APP_API_KEY}`
       );
-      const detailFetching = await axios.get(
-        `https://api.polygon.io/v3/reference/tickers/${id}?apiKey=zbd1YPIQqlJFRipVDQU1bRm3DMYrifM_`
+      const dateFetching = await axios(
+        `https://api.polygon.io/v2/aggs/ticker/${id}/range/1/day/${fromDate}/${toDate}?adjusted=true&sort=asc&limit=120&apiKey=${process.env.REACT_APP_API_POLYGON_KEY}`
       );
-      const yesDetailFetching = await axios.get(
-        `https://api.polygon.io/v2/aggs/ticker/${id}/prev?adjusted=true&apiKey=zbd1YPIQqlJFRipVDQU1bRm3DMYrifM_`
-      );
-      setYesDetail(yesDetailFetching.data);
-      setDateRange(rangeFetching.data);
-      setDetail(detailFetching.data.results);
+      setDetail(dateFetching.data.results);
+      setPriceInfo(priceInfoFetching.data);
     },
     {
       refetchOnWindowFocus: false,
     }
   );
-  if (yesDetail !== undefined) console.log(yesDetail, dateRange, detail);
+  console.log(detail, priceInfo);
+  if (detail !== undefined) console.log(priceInfo, detail);
   return (
     <DetailWrapper>
       {isLoading ? (
@@ -117,14 +117,19 @@ const Detail = () => {
           />
         )
       ) : (
-        <DetailHeader>
-          <img src={Logo} alt="Stock Logo" />
-          <div className="desc">
-            <h1>{yesDetail?.ticker}</h1>
-            <p>{detail?.name}</p>
-          </div>
-          <span className="price">${yesDetail?.results[0].c}</span>
-        </DetailHeader>
+        <>
+          <span className="notice">Stock Data as of {priceInfo?.datetime}</span>
+          <DetailHeader>
+            <img src={Logo} alt="Stock Logo" />
+            <div className="desc">
+              <h1>{priceInfo?.symbol}</h1>
+              <p>{priceInfo?.name}</p>
+            </div>
+            <span className="price">
+              ${parseFloat(priceInfo?.close).toFixed(2)}
+            </span>
+          </DetailHeader>
+        </>
       )}
     </DetailWrapper>
   );
