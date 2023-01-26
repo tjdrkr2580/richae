@@ -4,6 +4,7 @@ type themeTypes = {
   button: string;
   inputBorder: string;
   symbolUp: string;
+  symbolDown: string;
   primary: string;
   svg: string;
 };
@@ -14,6 +15,7 @@ export const lightTheme: themeTypes = {
   button: "#ECC5FB",
   inputBorder: "#ECC5FB",
   symbolUp: "#f57860",
+  symbolDown: "#33a8fe",
   primary: "#CDF0EA",
   svg: "#65647C",
 };
@@ -24,6 +26,7 @@ export const darkTheme: themeTypes = {
   button: "#5c5470",
   inputBorder: "#5c5470",
   symbolUp: "#e84d32",
+  symbolDown: "#0082e2",
   primary: "#5B8FB9",
   svg: "#65647C",
 };

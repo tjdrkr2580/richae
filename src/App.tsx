@@ -26,6 +26,16 @@ const RichaeWrapper = styled.div`
   a {
     color: ${(props) => props.theme.color};
   }
+  .plus {
+    font-size: 1.55rem;
+    font-weight: 500;
+    color: ${(props) => props.theme.symbolUp};
+  }
+  .minus {
+    font-size: 1.55rem;
+    font-weight: 500;
+    color: ${(props) => props.theme.symbolDown};
+  }
 `;
 
 function App() {

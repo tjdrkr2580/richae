@@ -28,8 +28,9 @@ const DetailWrapper = styled.section`
 `;
 
 const ChartWrapper = styled.div`
-  width: 100%;
+  width: 80%;
   margin: 0 auto;
+  height: 20rem;
 `;
 
 const DetailHeader = styled.header`
@@ -91,7 +92,25 @@ const DetailHeader = styled.header`
 const DetailInfoWrapper = styled.ul`
   display: flex;
   flex-direction: column;
+  li {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+    gap: 1rem;
+    .previous-different {
+      display: flex;
+      align-items: center;
+      .price {
+        font-size: 1.45rem;
+        font-weight: 700;
+        margin-right: 0.5rem;
+      }
+    }
+  }
 `;
+
+const TableWrapper = styled.table``;
 
 const Detail = () => {
   const darkmodeState = useRecoilValue(darkmode);
@@ -117,10 +136,10 @@ const Detail = () => {
   const { isLoading, isError } = useQuery(
     "fetching-detail-data",
     async () => {
-      const priceInfoFetching = await axios(
+      const priceInfoFetching = await axios.get(
         `https://api.twelvedata.com/quote?symbol=${id}&apikey=${process.env.REACT_APP_API_KEY}`
       );
-      const dateFetching = await axios(
+      const dateFetching = await axios.get(
         `https://api.polygon.io/v2/aggs/ticker/${id}/range/1/day/${fromDate}/${toDate}?adjusted=true&sort=asc&limit=120&apiKey=${process.env.REACT_APP_API_POLYGON_KEY}`
       );
       let num: number = dateFetching.data.results.length;
@@ -144,23 +163,23 @@ const Detail = () => {
     },
     yAxis: [
       {
+        gridLineWidth: 0,
+        gridLineColor: "transparent",
         title: { text: null },
         lineWidth: 0,
         labels: {
-          format: "$ {value:.1f}",
+          enabled: false,
         },
       },
     ],
     xAxis: {
-      categories: [
-        "7 days ago",
-        "6 days ago",
-        "5 days ago",
-        "4 days ago",
-        "3 days ago",
-        "2 days ago",
-        "1 day ago",
-      ],
+      labels: {
+        enabled: false,
+      },
+      tickColor: "transparent",
+      gridLineColor: "transparent",
+      lineColor: "transparent",
+      categories: undefined,
     },
     title: {
       text: "",
@@ -174,6 +193,7 @@ const Detail = () => {
     },
     colors: ["#0082e2"],
     chart: {
+      height: 200,
       backgroundColor: "transparent",
     },
     series: [
@@ -186,7 +206,7 @@ const Detail = () => {
     tooltip: {
       enabled: true,
       headerFormat: "",
-      pointFormat: "Close : $ {point.y: point.y,.2f}",
+      pointFormat: "{point.name} : $ {point.y: point.y,.2f}",
     },
     credits: {
       enabled: false,
@@ -195,7 +215,7 @@ const Detail = () => {
   if (detail !== undefined) console.log(priceInfo, detail);
   return (
     <DetailWrapper>
-      {isLoading === true ? (
+      {detail === undefined ? (
         darkmodeState ? (
           <SkeletonTheme baseColor="#202020" highlightColor="#444">
             <p>
@@ -235,6 +255,26 @@ const Detail = () => {
               options={options}
             />
           </ChartWrapper>
+          <DetailInfoWrapper>
+            <li>
+              Difference from before:
+              <div className="previous-different">
+                <span className="price">
+                  ${parseFloat(detail[detail?.length - 2][1]).toFixed(2)}
+                </span>
+                {priceInfo?.change < 0 ? (
+                  <span className="minus">
+                    {parseFloat(priceInfo?.change).toFixed(2)}%
+                  </span>
+                ) : (
+                  <span className="plus">
+                    +{parseFloat(priceInfo?.change).toFixed(2)}%
+                  </span>
+                )}
+              </div>
+            </li>
+          </DetailInfoWrapper>
+          <TableWrapper></TableWrapper>
         </>
       )}
     </DetailWrapper>
