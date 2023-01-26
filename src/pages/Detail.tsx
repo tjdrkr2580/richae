@@ -18,44 +18,79 @@ const DetailWrapper = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5rem;
+  gap: 3rem;
   .notice {
+    @media (min-width: 374px) and (max-width: 375px) {
+      margin-top: 5rem;
+    }
     font-size: 1.45rem;
-    margin-bottom: 1rem;
   }
+`;
+
+const ChartWrapper = styled.div`
+  width: 100%;
+  margin: 0 auto;
 `;
 
 const DetailHeader = styled.header`
   display: flex;
   align-items: center;
   gap: 1.5rem;
+  margin: 0 auto;
+  @media (max-width: 413px) {
+    img {
+      width: 6rem;
+      height: 6rem;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    h1 {
+      font-size: 3rem;
+    }
+    .desc {
+      display: flex;
+      flex-direction: column;
+      p {
+        width: 21rem;
+      }
+    }
+    .price {
+      font-size: 3rem;
+      font-weight: 700;
+    }
+  }
   img {
-    width: 6rem;
-    height: 6rem;
+    width: 5rem;
+    height: 5rem;
     border-radius: 50%;
     object-fit: cover;
   }
   h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
   .desc {
     display: flex;
     flex-direction: column;
     p {
-      width: 21rem;
+      width: 35vw;
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
       -webkit-line-clamp: 1; /* 라인수 */
       -webkit-box-orient: vertical;
       word-wrap: break-word;
-      font-size: 1.25rem;
+      font-size: 1.2rem;
     }
   }
   .price {
     font-size: 3.5rem;
     font-weight: 700;
   }
+`;
+
+const DetailInfoWrapper = styled.ul`
+  display: flex;
+  flex-direction: column;
 `;
 
 const Detail = () => {
@@ -193,11 +228,13 @@ const Detail = () => {
               ${parseFloat(priceInfo?.close).toFixed(2)}
             </span>
           </DetailHeader>
-          <HighchartsReact
-            containerProps={{ className: "home_body-chart" }}
-            highcharts={Highcharts}
-            options={options}
-          />
+          <ChartWrapper>
+            <HighchartsReact
+              containerProps={{ className: "home_body-chart" }}
+              highcharts={Highcharts}
+              options={options}
+            />
+          </ChartWrapper>
         </>
       )}
     </DetailWrapper>
