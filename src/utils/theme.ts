@@ -17,7 +17,7 @@ export const lightTheme: themeTypes = {
   symbolUp: "#f57860",
   symbolDown: "#33a8fe",
   primary: "#CDF0EA",
-  svg: "#65647C",
+  svg: "#cdcdcd",
 };
 
 export const darkTheme: themeTypes = {
@@ -28,5 +28,5 @@ export const darkTheme: themeTypes = {
   symbolUp: "#e84d32",
   symbolDown: "#0082e2",
   primary: "#5B8FB9",
-  svg: "#65647C",
+  svg: "#333",
 };

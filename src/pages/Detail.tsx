@@ -110,7 +110,28 @@ const DetailInfoWrapper = styled.ul`
   }
 `;
 
-const TableWrapper = styled.table``;
+const TableWrapper = styled.table`
+  margin-top: 3rem;
+  width: 95%;
+  th {
+    height: 3rem;
+    font-size: 1.3rem;
+    &:first-child {
+      background-color: ${(props) => props.theme.svg};
+    }
+    &:nth-child(2) {
+      width: 20%;
+    }
+  }
+  td {
+    padding: 0.8rem 0.8rem;
+    font-size: 1.2rem;
+    height: 2rem;
+    &:nth-child(2) {
+      background-color: ${(props) => props.theme.svg};
+    }
+  }
+`;
 
 const Detail = () => {
   const darkmodeState = useRecoilValue(darkmode);
@@ -132,8 +153,10 @@ const Detail = () => {
     ("00" + (day - 10)).slice(-2);
   const { id } = useParams();
   const [priceInfo, setPriceInfo] = useState<any>(undefined);
-  const [detail, setDetail] = useState<any>(undefined); //나중에 지정
+  const [closes, setCloses] = useState<any>(undefined); //나중에 지정
+  const [datePrice, setDatePrice] = useState<any>(undefined);
   const { isLoading, isError } = useQuery(
+    //개선사항 적용할 것
     "fetching-detail-data",
     async () => {
       const priceInfoFetching = await axios.get(
@@ -150,7 +173,8 @@ const Detail = () => {
           return [text, prices.c];
         }
       );
-      setDetail(dateMap);
+      setDatePrice(dateFetching.data);
+      setCloses(dateMap);
       setPriceInfo(priceInfoFetching.data);
     },
     {
@@ -200,7 +224,7 @@ const Detail = () => {
       {
         type: "spline",
         name: "A week's closing price",
-        data: detail,
+        data: closes,
       },
     ],
     tooltip: {
@@ -211,11 +235,14 @@ const Detail = () => {
     credits: {
       enabled: false,
     },
+    accessibility: {
+      enabled: false,
+    },
   };
-  if (detail !== undefined) console.log(priceInfo, detail);
+  if (closes !== undefined) console.log(priceInfo, datePrice);
   return (
     <DetailWrapper>
-      {detail === undefined ? (
+      {datePrice === undefined ? (
         darkmodeState ? (
           <SkeletonTheme baseColor="#202020" highlightColor="#444">
             <p>
@@ -260,7 +287,10 @@ const Detail = () => {
               Difference from before:
               <div className="previous-different">
                 <span className="price">
-                  ${parseFloat(detail[detail?.length - 2][1]).toFixed(2)}
+                  $
+                  {datePrice.results[datePrice?.results.length - 1].c.toFixed(
+                    2
+                  )}
                 </span>
                 {priceInfo?.change < 0 ? (
                   <span className="minus">
@@ -274,7 +304,62 @@ const Detail = () => {
               </div>
             </li>
           </DetailInfoWrapper>
-          <TableWrapper></TableWrapper>
+          <TableWrapper>
+            <tr>
+              <th>Name</th>
+              <th>Sub</th>
+              <th>Value</th>
+            </tr>
+            <tr>
+              <td rowSpan={2}>Common</td>
+              <td>Currency</td>
+              <td>{priceInfo?.currency}</td>
+            </tr>
+            <tr>
+              <td>Market_open</td>
+              <td>{priceInfo?.is_market_open ? "Open" : "Close"}</td>
+            </tr>
+            <tr>
+              <td rowSpan={2}>Yesterday</td>
+              <td>High</td>
+              <td>
+                ${datePrice.results[datePrice?.results.length - 1].h.toFixed(2)}
+              </td>
+            </tr>
+            <tr>
+              <td>Low</td>
+              <td>
+                ${datePrice.results[datePrice?.results.length - 1].l.toFixed(2)}
+              </td>
+            </tr>
+            <tr>
+              <td rowSpan={4}>52-Weeks</td>
+              <td>High</td>
+              <td>${parseFloat(priceInfo?.fifty_two_week.high).toFixed(2)}</td>
+            </tr>
+            <tr>
+              <td>Low</td>
+              <td>${parseFloat(priceInfo?.fifty_two_week.low).toFixed(2)}</td>
+            </tr>
+            <tr>
+              <td>High cp</td>
+              <td>
+                {parseFloat(
+                  priceInfo?.fifty_two_week.high_change_percent
+                ).toFixed(2)}
+                %
+              </td>
+            </tr>
+            <tr>
+              <td>Low cp</td>
+              <td>
+                {parseFloat(
+                  priceInfo?.fifty_two_week.low_change_percent
+                ).toFixed(2)}
+                %
+              </td>
+            </tr>
+          </TableWrapper>
         </>
       )}
     </DetailWrapper>
