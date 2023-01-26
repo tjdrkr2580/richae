@@ -37,13 +37,19 @@ npm start || yarn start //craco start <-- project start [craco]
 
 ## Richae | Develop today..
 
+### 2022-01-26
+
+- [x] close price highchart
+- [] detail styling
+- [] detail information select
+- [] Modal Warning
+- [] \*none Warinning button
+
 ### 2022-01-25
 
-- [ ] Error Handling
+- [x] Error Handling
 - [x] Fetching Skeleton UI
-- [ ] Detail Datas Fetching
-- [ ] Modal Warning
-- [ ] \*none Warinning button
+- [x] Detail Datas Fetching
 
 ### 2022-01-24
 
