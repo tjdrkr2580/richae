@@ -73,7 +73,7 @@ const EtfList = () => {
             },
           }
         );
-        setEtfState(etfList.data.data.slice(0, 200));
+        setEtfState(etfList.data.data);
       }
     },
     {

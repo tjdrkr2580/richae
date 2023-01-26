@@ -20,8 +20,9 @@ const DetailWrapper = styled.section`
   align-items: center;
   gap: 3rem;
   .notice {
+    margin-top: 5rem;
     @media (min-width: 374px) and (max-width: 375px) {
-      margin-top: 5rem;
+      margin-top: 7.5rem;
     }
     font-size: 1.45rem;
   }
@@ -125,12 +126,24 @@ const TableWrapper = styled.table`
   }
   td {
     padding: 0.8rem 0.8rem;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     height: 2rem;
     &:nth-child(2) {
       background-color: ${(props) => props.theme.svg};
     }
+    .minus {
+      font-size: 1.3rem;
+    }
+    .plus {
+      font-size: 1.3rem;
+    }
   }
+`;
+
+const RowSpantd = styled.td`
+  text-align: center;
+  font-weight: 500;
+  font-size: 1.45rem !important;
 `;
 
 const Detail = () => {
@@ -239,7 +252,6 @@ const Detail = () => {
       enabled: false,
     },
   };
-  if (closes !== undefined) console.log(priceInfo, datePrice);
   return (
     <DetailWrapper>
       {datePrice === undefined ? (
@@ -305,60 +317,96 @@ const Detail = () => {
             </li>
           </DetailInfoWrapper>
           <TableWrapper>
-            <tr>
-              <th>Name</th>
-              <th>Sub</th>
-              <th>Value</th>
-            </tr>
-            <tr>
-              <td rowSpan={2}>Common</td>
-              <td>Currency</td>
-              <td>{priceInfo?.currency}</td>
-            </tr>
-            <tr>
-              <td>Market_open</td>
-              <td>{priceInfo?.is_market_open ? "Open" : "Close"}</td>
-            </tr>
-            <tr>
-              <td rowSpan={2}>Yesterday</td>
-              <td>High</td>
-              <td>
-                ${datePrice.results[datePrice?.results.length - 1].h.toFixed(2)}
-              </td>
-            </tr>
-            <tr>
-              <td>Low</td>
-              <td>
-                ${datePrice.results[datePrice?.results.length - 1].l.toFixed(2)}
-              </td>
-            </tr>
-            <tr>
-              <td rowSpan={4}>52-Weeks</td>
-              <td>High</td>
-              <td>${parseFloat(priceInfo?.fifty_two_week.high).toFixed(2)}</td>
-            </tr>
-            <tr>
-              <td>Low</td>
-              <td>${parseFloat(priceInfo?.fifty_two_week.low).toFixed(2)}</td>
-            </tr>
-            <tr>
-              <td>High cp</td>
-              <td>
-                {parseFloat(
-                  priceInfo?.fifty_two_week.high_change_percent
-                ).toFixed(2)}
-                %
-              </td>
-            </tr>
-            <tr>
-              <td>Low cp</td>
-              <td>
-                {parseFloat(
-                  priceInfo?.fifty_two_week.low_change_percent
-                ).toFixed(2)}
-                %
-              </td>
-            </tr>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Sub</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <RowSpantd rowSpan={2}>Common</RowSpantd>
+                <td>Currency</td>
+                <td>{priceInfo?.currency}</td>
+              </tr>
+              <tr>
+                <td>Market_open</td>
+                <td>{priceInfo?.is_market_open ? "Open" : "Close"}</td>
+              </tr>
+              <tr>
+                <RowSpantd rowSpan={2}>Yesterday</RowSpantd>
+                <td>High</td>
+                <td>
+                  $
+                  {datePrice.results[datePrice?.results.length - 1].h.toFixed(
+                    2
+                  )}
+                </td>
+              </tr>
+              <tr>
+                <td>Low</td>
+                <td>
+                  $
+                  {datePrice.results[datePrice?.results.length - 1].l.toFixed(
+                    2
+                  )}
+                </td>
+              </tr>
+              <tr>
+                <RowSpantd rowSpan={4}>52-Weeks</RowSpantd>
+                <td>High</td>
+                <td>
+                  ${parseFloat(priceInfo?.fifty_two_week.high).toFixed(2)}
+                </td>
+              </tr>
+              <tr>
+                <td>Low</td>
+                <td>${parseFloat(priceInfo?.fifty_two_week.low).toFixed(2)}</td>
+              </tr>
+              <tr>
+                <td>High cp</td>
+                <td>
+                  {priceInfo?.fifty_two_week.high_change_percent > 0 ? (
+                    <span className="plus">
+                      +
+                      {parseFloat(
+                        priceInfo?.fifty_two_week.high_change_percent
+                      ).toFixed(2)}
+                      %
+                    </span>
+                  ) : (
+                    <span className="minus">
+                      {parseFloat(
+                        priceInfo?.fifty_two_week.high_change_percent
+                      ).toFixed(2)}
+                      %
+                    </span>
+                  )}
+                </td>
+              </tr>
+              <tr>
+                <td>Low cp</td>
+                <td>
+                  {priceInfo?.fifty_two_week.low_change_percent > 0 ? (
+                    <span className="plus">
+                      +
+                      {parseFloat(
+                        priceInfo?.fifty_two_week.low_change_percent
+                      ).toFixed(2)}
+                      %
+                    </span>
+                  ) : (
+                    <span className="minus">
+                      {parseFloat(
+                        priceInfo?.fifty_two_week.low_change_percent
+                      ).toFixed(2)}
+                      %
+                    </span>
+                  )}
+                </td>
+              </tr>
+            </tbody>
           </TableWrapper>
         </>
       )}
