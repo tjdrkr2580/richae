@@ -42,7 +42,14 @@ npm start || yarn start //craco start <-- project start [craco]
 - [ ] Country..
 - [ ] Type Add..
 - [ ] Skeleton..
-- [ ] News..
+
+### 2022-01-27
+
+- [ ] Country..
+- [ ] Type Add..
+- [ ] Skeleton..
+- [x] News..
+- [x] Detail Infos..
 
 ### 2022-01-26
 

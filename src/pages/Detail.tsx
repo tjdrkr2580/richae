@@ -194,7 +194,7 @@ const News = styled.li`
   flex-direction: column;
   min-width: 19rem;
   max-width: 20rem;
-  height: 100%;
+  height: 22rem;
   background-color: ${(props) => props.theme.svg};
   padding: 0.3rem 0.3rem;
   img {
@@ -275,7 +275,7 @@ const Detail = () => {
       const detailFetching = await axios.get(
         `https://finnhub.io/api/v1/stock/profile2?symbol=${id}&token=${process.env.REACT_APP_API_FINNHUB}`
       );
-      let num: number = dateFetching?.data.results.length;
+      let num: any = dateFetching?.data?.results?.length;
       const dateMap = await dateFetching?.data.results.map(
         (prices: any, index: number) => {
           let text: number | string = num + " day ago";
@@ -351,7 +351,6 @@ const Detail = () => {
       enabled: false,
     },
   };
-  console.log(detail);
   return (
     <DetailWrapper>
       {news === undefined || isError === true ? (
@@ -436,9 +435,7 @@ const Detail = () => {
                     : "-"}
                 </li>
               </InfoList>
-            ) : (
-              <Skeleton width={340} />
-            )}
+            ) : null}
           </DetailInfoWrapper>
           <TableWrapper>
             <thead>
@@ -540,7 +537,7 @@ const Detail = () => {
           {news?.map((news: any, index: number) => (
             <a href={news.url} key={index} target="_blank" rel="noreferrer">
               <News>
-                <img src={news.image} alt="news-img" />
+                <img src={!news.image ? Logo : news.image} alt="news-img" />
                 <span>{news.headline}</span>
                 <p>{news.summary}</p>
                 <span className="source">{news.source}</span>
