@@ -276,7 +276,7 @@ const Detail = () => {
         `https://finnhub.io/api/v1/stock/profile2?symbol=${id}&token=${process.env.REACT_APP_API_FINNHUB}`
       );
       let num: any = dateFetching?.data?.results?.length;
-      const dateMap = await dateFetching?.data.results.map(
+      const dateMap = await dateFetching?.data?.results?.map(
         (prices: any, index: number) => {
           let text: number | string = num + " day ago";
           num -= 1;
