@@ -37,7 +37,7 @@ npm start || yarn start //craco start <-- project start [craco]
 
 ## Richae | Develop today..
 
-### 2022-01-27
+### 2022-01-28
 
 - [ ] Country..
 - [ ] Type Add..
@@ -45,9 +45,7 @@ npm start || yarn start //craco start <-- project start [craco]
 
 ### 2022-01-27
 
-- [ ] Country..
-- [ ] Type Add..
-- [ ] Skeleton..
+- [x] Footer..
 - [x] News..
 - [x] Detail Infos..
 
