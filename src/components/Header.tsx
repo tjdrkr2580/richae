@@ -15,6 +15,9 @@ const HeaderFixedWrapper = styled.header`
   left: 0;
   height: 6.5rem;
   background-color: ${(props) => props.theme.bgColor};
+  @media (max-width: 413px) {
+    height: 5rem;
+  }
 `;
 
 const HeaderWrapper = styled.section`
@@ -28,6 +31,9 @@ const HeaderWrapper = styled.section`
   border-bottom: 0.25rem solid ${(props) => props.theme.color};
 
   h1 {
+    @media (max-width: 413px) {
+      font-size: 3rem;
+    }
     cursor: pointer;
     font-family: "Zilla Slab", serif;
     font-size: 4rem;

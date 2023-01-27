@@ -1,4 +1,5 @@
 import { detailType } from "@utils/type";
+
 import axios from "axios";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
@@ -28,6 +29,20 @@ const DetailWrapper = styled.section`
   }
 `;
 
+const InfoList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  list-style: circle;
+  gap: 0.7rem;
+  li {
+    font-weight: 500;
+    font-size: 1.2rem;
+    &:first-child {
+      padding-top: 0.6rem;
+    }
+  }
+`;
+
 const ChartWrapper = styled.div`
   width: 80%;
   margin: 0 auto;
@@ -44,7 +59,7 @@ const DetailHeader = styled.header`
       width: 6rem;
       height: 6rem;
       border-radius: 50%;
-      object-fit: cover;
+      object-fit: fill;
     }
     h1 {
       font-size: 3rem;
@@ -62,8 +77,8 @@ const DetailHeader = styled.header`
     }
   }
   img {
-    width: 5rem;
-    height: 5rem;
+    width: 6rem;
+    height: 6rem;
     border-radius: 50%;
     object-fit: cover;
   }
@@ -104,7 +119,6 @@ const DetailInfoWrapper = styled.ul`
       align-items: center;
       .price {
         font-size: 1.45rem;
-        font-weight: 700;
         margin-right: 0.5rem;
       }
     }
@@ -146,6 +160,81 @@ const RowSpantd = styled.td`
   font-size: 1.45rem !important;
 `;
 
+const ChapterText = styled.h1`
+  margin: 1rem 0;
+  width: 100%;
+  font-size: 2.5rem;
+  font-weight: 500;
+  padding-left: 1.5rem;
+  align-self: flex-start;
+`;
+
+const ErrorText = styled.h2`
+  font-size: 1.8rem;
+  font-weight: 500;
+  padding-left: 1.5rem;
+`;
+
+const NewsWrapper = styled.ul`
+  width: 90%;
+  display: flex;
+  overflow-y: auto;
+  height: 25rem;
+  gap: 1rem;
+  padding-left: 1rem;
+  align-items: center;
+  background-color: transparent;
+`;
+
+const News = styled.li`
+  cursor: pointer;
+  transition: 0.25s filter;
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+  min-width: 19rem;
+  max-width: 20rem;
+  height: 100%;
+  background-color: ${(props) => props.theme.svg};
+  padding: 0.3rem 0.3rem;
+  img {
+    margin-bottom: 0.5rem;
+    align-self: center;
+    object-fit: fill;
+    width: 99%;
+    height: 12rem;
+  }
+  span {
+    padding-left: 0.45rem;
+    font-size: 1.3rem;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* 라인수 */
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+  }
+  .source {
+    font-size: 1rem;
+    padding-bottom: 0.5rem;
+  }
+  p {
+    padding-left: 0.45rem;
+    width: 98%;
+    font-size: 1.15rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* 라인수 */
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+  }
+  &:hover {
+    filter: brightness(90%);
+  }
+`;
+
 const Detail = () => {
   const darkmodeState = useRecoilValue(darkmode);
   const date = new Date();
@@ -168,6 +257,8 @@ const Detail = () => {
   const [priceInfo, setPriceInfo] = useState<any>(undefined);
   const [closes, setCloses] = useState<any>(undefined); //나중에 지정
   const [datePrice, setDatePrice] = useState<any>(undefined);
+  const [news, setNews] = useState<any>(undefined);
+  const [detail, setDetail] = useState<any>(undefined);
   const { isLoading, isError } = useQuery(
     //개선사항 적용할 것
     "fetching-detail-data",
@@ -178,8 +269,14 @@ const Detail = () => {
       const dateFetching = await axios.get(
         `https://api.polygon.io/v2/aggs/ticker/${id}/range/1/day/${fromDate}/${toDate}?adjusted=true&sort=asc&limit=120&apiKey=${process.env.REACT_APP_API_POLYGON_KEY}`
       );
-      let num: number = dateFetching.data.results.length;
-      const dateMap = await dateFetching.data.results.map(
+      const newsFetching = await axios.get(
+        `https://finnhub.io/api/v1/company-news?symbol=${id}&from=${fromDate}&to=${toDate}&token=${process.env.REACT_APP_API_FINNHUB}`
+      );
+      const detailFetching = await axios.get(
+        `https://finnhub.io/api/v1/stock/profile2?symbol=${id}&token=${process.env.REACT_APP_API_FINNHUB}`
+      );
+      let num: number = dateFetching?.data.results.length;
+      const dateMap = await dateFetching?.data.results.map(
         (prices: any, index: number) => {
           let text: number | string = num + " day ago";
           num -= 1;
@@ -189,6 +286,8 @@ const Detail = () => {
       setDatePrice(dateFetching.data);
       setCloses(dateMap);
       setPriceInfo(priceInfoFetching.data);
+      setNews(newsFetching.data);
+      setDetail(detailFetching.data);
     },
     {
       refetchOnWindowFocus: false,
@@ -252,9 +351,10 @@ const Detail = () => {
       enabled: false,
     },
   };
+  console.log(detail);
   return (
     <DetailWrapper>
-      {datePrice === undefined ? (
+      {news === undefined || isError === true ? (
         darkmodeState ? (
           <SkeletonTheme baseColor="#202020" highlightColor="#444">
             <p>
@@ -278,7 +378,10 @@ const Detail = () => {
         <>
           <span className="notice">Stock Data as of {priceInfo?.datetime}</span>
           <DetailHeader>
-            <img src={Logo} alt="Stock Logo" />
+            <img
+              src={detail?.logo === undefined ? Logo : detail?.logo}
+              alt="Stock Logo"
+            />
             <div className="desc">
               <h1>{priceInfo?.symbol}</h1>
               <p>{priceInfo?.name}</p>
@@ -315,6 +418,27 @@ const Detail = () => {
                 )}
               </div>
             </li>
+            {detail?.ipo ? (
+              <InfoList>
+                <li>IPO : {detail?.ipo ? detail?.ipo : "-"}</li>
+                <li>Name : {detail?.name ? detail?.name : "-"}</li>
+                <li>
+                  FinnhubIndustry :{" "}
+                  {detail?.finnhubIndustry === "N/A"
+                    ? "-"
+                    : detail?.finnhubIndustry}
+                </li>
+                <li>Exchange : {detail?.exchange ? detail?.exchange : "-"}</li>
+                <li>
+                  MarketCap : ${" "}
+                  {detail?.marketCapitalization
+                    ? detail?.marketCapitalization
+                    : "-"}
+                </li>
+              </InfoList>
+            ) : (
+              <Skeleton width={340} />
+            )}
           </DetailInfoWrapper>
           <TableWrapper>
             <thead>
@@ -339,7 +463,7 @@ const Detail = () => {
                 <td>High</td>
                 <td>
                   $
-                  {datePrice.results[datePrice?.results.length - 1].h.toFixed(
+                  {datePrice?.results[datePrice?.results.length - 1].h.toFixed(
                     2
                   )}
                 </td>
@@ -348,7 +472,7 @@ const Detail = () => {
                 <td>Low</td>
                 <td>
                   $
-                  {datePrice.results[datePrice?.results.length - 1].l.toFixed(
+                  {datePrice?.results[datePrice?.results.length - 1].l.toFixed(
                     2
                   )}
                 </td>
@@ -410,6 +534,24 @@ const Detail = () => {
           </TableWrapper>
         </>
       )}
+      {news === undefined ? null : <ChapterText>Week News</ChapterText>}
+      {news?.length !== 0 ? (
+        <NewsWrapper>
+          {news?.map((news: any, index: number) => (
+            <a href={news.url} key={index} target="_blank" rel="noreferrer">
+              <News>
+                <img src={news.image} alt="news-img" />
+                <span>{news.headline}</span>
+                <p>{news.summary}</p>
+                <span className="source">{news.source}</span>
+              </News>
+            </a>
+          ))}
+        </NewsWrapper>
+      ) : null}
+      {news?.length === 0 ? (
+        <ErrorText>News from the last week doesn't exist.</ErrorText>
+      ) : null}
     </DetailWrapper>
   );
 };
