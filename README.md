@@ -37,11 +37,14 @@ npm start || yarn start //craco start <-- project start [craco]
 
 ## Richae | Develop today..
 
+Due to the time limit, let's wrap it up here.
+The timetable becomes dangerous if you proceed with any more projects.
+
+I learned a lot of things.
+
 ### 2022-01-28
 
-- [ ] Country..
-- [ ] Type Add..
-- [ ] Skeleton..
+- [x] any................
 
 ### 2022-01-27
 

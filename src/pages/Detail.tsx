@@ -359,18 +359,16 @@ const Detail = () => {
             <p>
               <Skeleton
                 width={300}
-                count={20}
-                height={72.5}
-                style={{ marginBottom: "2rem", borderRadius: "1rem" }}
+                height={1000}
+                style={{ borderRadius: "1rem" }}
               />
             </p>
           </SkeletonTheme>
         ) : (
           <Skeleton
-            count={20}
             width={300}
-            height={72.5}
-            style={{ marginBottom: "2rem", borderRadius: "1rem" }}
+            height={1500}
+            style={{ borderRadius: "1rem" }}
           />
         )
       ) : (
