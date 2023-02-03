@@ -1,5 +1,8 @@
 # Richae | Find the ETF information you want.
 
+*The project is not running normally because the current api is dormant.*
+
+
 ![Richae-d.png](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/9b5e2c30-7cfb-40f1-b74d-b9f7e3d73a75/Richae-d.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20230121%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20230121T213510Z&X-Amz-Expires=86400&X-Amz-Signature=904f6c777a86fa96db6882a28737aca831d2aa1048ff5c4fa6f4812b964ec457&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Richae-d.png%22&x-id=GetObject)
 
 ![Richae-f.png](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/1e78cf30-8205-4b83-88da-df7a15db38cd/Richae-f.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20230121%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20230121T213546Z&X-Amz-Expires=86400&X-Amz-Signature=1460ebca118a626b91809db97e8b0dc69a68a63699db3ec3689435976ec5bffa&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Richae-f.png%22&x-id=GetObject)
