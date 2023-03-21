@@ -1,5 +1,7 @@
 # Richae | Find the ETF information you want.
 
+현재 프로젝트는 폐쇄된 상태입니다.
+
 *The project is not running normally because the current api is dormant.*
 
 
